@@ -1,21 +1,58 @@
 
-<main class="main">
-    <section class="section">
+<header>
+    <button (click)="switchButton()">
+        {{!isButtonActivated ? 'Conectar' : 'Desconectar'}}
+    </button>
+    <span *ngIf="!isButtonActivated" style="color: brown; font-weight: 600;">
+        Desconectado!!
+    </span>
+</header>
+<div class="change-template">
+    <span>Context view</span>     
+    <input type="checkbox" id="toggle" class="checkbox" (click)="changeContext()"/>
+    <label for="toggle" class="switch"></label>
+</div>
+<div class="main">
+    <section class="section" *ngIf="viewHobbits; else viewFriends">
         <h3>Hobbit Quotes</h3>
         <div class="card" *ngFor="let hobbitQuote of hobbitQuotes">
-            <div class="container">{{hobbitQuote}}</div>
-        </div>
-        <div *ngIf="!hobbitQuotes.length">
-            <div class="loader"></div>
+            <div class="container">
+                <div class="header">
+                    <p>
+                        <strong>Offset:</strong> {{hobbitQuote.offset}}
+                    </p> 
+                    <p>
+                        <strong>Partition:</strong> {{hobbitQuote.partition}}
+                    </p> 
+                </div>
+                <div class="content">
+                    <p>
+                        {{hobbitQuote.value}}
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
-    <section class="section">
-        <h3>Friends Quotes</h3>
-        <div class="card" *ngFor="let friendsQuote of friendsQuotes">
-            <div class="container">{{friendsQuote}}</div>
-        </div>
-        <div *ngIf="!friendsQuotes.length">
-            <div class="loader"></div>
-        </div>
-    </section>
-</main>
+    <ng-template #viewFriends>
+        <section class="section">
+            <h3>Friends Quotes</h3>
+            <div class="card" *ngFor="let friendsQuote of friendsQuotes">
+                <div class="container">
+                    <div class="header">
+                        <p>
+                            <strong>Offset:</strong> {{friendsQuote.offset}}
+                        </p> 
+                        <p>
+                            <strong>Partition:</strong> {{friendsQuote.partition}}
+                        </p> 
+                    </div>
+                    <div class="content">
+                        <p>
+                            {{friendsQuote.value}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </ng-template>    
+</div>
