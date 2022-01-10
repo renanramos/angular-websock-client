@@ -1,0 +1,8 @@
+<section class="section">
+    <h3>Friends Quotes</h3>
+    <div class="card" *ngFor="let friendsQuote of friendsQuotes">
+        <app-card-info [info]="friendsQuote"></app-card-info>
+    </div>
+    <app-loader [show]="showloader && stompServiceStatus"></app-loader>
+    <span *ngIf="!stompServiceStatus">Servidor desconectado...</span>
+</section>

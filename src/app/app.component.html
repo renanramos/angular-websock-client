@@ -1,58 +1,12 @@
-
-<header>
-    <button (click)="switchButton()">
-        {{!isButtonActivated ? 'Conectar' : 'Desconectar'}}
-    </button>
-    <span *ngIf="!isButtonActivated" style="color: brown; font-weight: 600;">
-        Desconectado!!
-    </span>
-</header>
-<div class="change-template">
-    <span>Context view</span>     
-    <input type="checkbox" id="toggle" class="checkbox" (click)="changeContext()"/>
-    <label for="toggle" class="switch"></label>
-</div>
+<ul class="topnav">
+    <li [ngClass]="{'active': this.viewHobbits}" (click)="this.viewHobbits = !this.viewHobbits">Hobbits</li>
+    <li [ngClass]="{'active': !this.viewHobbits}" (click)="this.viewHobbits = !this.viewHobbits">Friends</li>
+    <li (click)="switchButton()">
+        <i class="{{isButtonActivated ? 'fas fa-toggle-on' : 'fas fa-toggle-off'}} "></i>
+        {{ isButtonActivated ? 'Conectado' : 'Desconectado'}}
+    </li>
+</ul>
 <div class="main">
-    <section class="section" *ngIf="viewHobbits; else viewFriends">
-        <h3>Hobbit Quotes</h3>
-        <div class="card" *ngFor="let hobbitQuote of hobbitQuotes">
-            <div class="container">
-                <div class="header">
-                    <p>
-                        <strong>Offset:</strong> {{hobbitQuote.offset}}
-                    </p> 
-                    <p>
-                        <strong>Partition:</strong> {{hobbitQuote.partition}}
-                    </p> 
-                </div>
-                <div class="content">
-                    <p>
-                        {{hobbitQuote.value}}
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <ng-template #viewFriends>
-        <section class="section">
-            <h3>Friends Quotes</h3>
-            <div class="card" *ngFor="let friendsQuote of friendsQuotes">
-                <div class="container">
-                    <div class="header">
-                        <p>
-                            <strong>Offset:</strong> {{friendsQuote.offset}}
-                        </p> 
-                        <p>
-                            <strong>Partition:</strong> {{friendsQuote.partition}}
-                        </p> 
-                    </div>
-                    <div class="content">
-                        <p>
-                            {{friendsQuote.value}}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </ng-template>    
+    <app-hobbit-list *ngIf="this.viewHobbits"></app-hobbit-list>
+    <app-friends-list *ngIf="!this.viewHobbits"></app-friends-list>
 </div>

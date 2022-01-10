@@ -1,0 +1,8 @@
+<section class="section">
+    <h3>Hobbit Quotes</h3>
+    <div class="card" *ngFor="let hobbitQuote of hobbitQuotes">
+        <app-card-info [info]="hobbitQuote"></app-card-info>
+    </div>
+    <app-loader [show]="showloader && stompServiceStatus"></app-loader>
+    <span *ngIf="!stompServiceStatus">Servidor desconectado...</span>
+</section>
